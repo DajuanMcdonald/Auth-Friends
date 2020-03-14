@@ -1,9 +1,12 @@
 import React from 'react';
-import {Route, BrowserRouter, Link} from 'react-router-dom';
+import {Route, BrowserRouter, Link, Switch} from 'react-router-dom';
 import './App.css'
 
+import Login from './Login';
+import PrivateRoute from './routes/PrivateRoute';
+
 const Friends = () => <Link>Friends</Link>
-const Protected = () => <Link>Login</Link>
+const Login = () => <Link>Login</Link>
 
 
 class App extends React.Component {
@@ -26,6 +29,12 @@ class App extends React.Component {
                       </Link>
                     </li>
                   </ul>
+
+                  <Switch>
+                    <PrivateRoute exact path='/friends' component={Friends} />
+                    <Route path='/login' component={Login} />
+                    
+                  </Switch>
                 </nav>
                   <Route path="/login"/>
                   <Route path="/friends"/>
