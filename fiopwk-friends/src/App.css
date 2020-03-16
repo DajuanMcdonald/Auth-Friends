@@ -39,11 +39,19 @@
 }
 
 .navigation {
-  background-color: #282c34;
-  /* color: white; */
-  line-height: 20px;
+  background-color: #8aa0cc;
   
   
+  
+  
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  font-weight: 200;
+  font-size: 40px;
 }
 
 @keyframes App-logo-spin {

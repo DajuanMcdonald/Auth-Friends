@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter, Link, Switch } from 'react-router-dom';
 import './App.css'
 import Friends from './components/Friends';
+import Home from './components/Home';
 
 import Login from './Login';
 import PrivateRoute from './routes/PrivateRoute';
@@ -17,19 +18,24 @@ class App extends React.Component {
 
         <div className="App">
           <nav className="navigation">
-            <ul>
+            <ul className="nav-links">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
               <li>
                 <Link to="/friends">Friends</Link>
               </li>
               <li>
                 <Link to="/login">Login</Link>
               </li>
+              
             </ul>
           </nav>
 
             <Switch>
               <PrivateRoute exact path='/friends' component={Friends} />
               <Route path='/login' component={Login} />
+              <Route path="/" exact component={Home} />
               
               <Route component={Login} />
               

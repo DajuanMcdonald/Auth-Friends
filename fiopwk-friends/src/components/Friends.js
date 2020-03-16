@@ -1,5 +1,6 @@
 import React from 'react';
 import { axiosWithAuth } from '../utils/AxiosWithAuth';
+import axios from 'axios';
 import Loader from 'react-loader-spinner';
 
 export default class Friends extends React.Component {
@@ -13,13 +14,23 @@ export default class Friends extends React.Component {
 
     getFriends = () => {
         axiosWithAuth()
-            .get('/api/friends')
+        
+            .get('/friends')
             .then(res => {
-                // console.log(res)
+                console.log('rest', res.data)
                 this.setState({
                     friendsList: res.data
                 })
             })
+    }
+
+    postFriends = (friend) => {
+        axiosWithAuth()
+        .post('/friends', JSON.parse(JSON.stringify(friend)))
+        .then(res => {
+            this.getFriends();
+        })
+        .catch(error => console.log(error.message.status))
     }
 
     render() {
@@ -41,9 +52,9 @@ export default class Friends extends React.Component {
                     />
 
 
-                    <button>Add a Friend</button>
+                    <button onClick={this.postFriends}>Add a Friend</button>
                 </form>
-                <Loader type="Puff" color="#204963" height="60" width="60" />
+                <Loader type="ThreeDots" color="#204963" height={60} width={60} />
                 {this.state.friendsList.map(friend => (
                     <div friend={friend} key={friend.id} />
                 ))}
