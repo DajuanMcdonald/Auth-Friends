@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 import { axiosWithAuth } from './utils/AxiosWithAuth';
 import './App.css';
 
@@ -11,7 +11,8 @@ class Login extends React.Component {
             credentials: {
                 username: 'Lambda School',
                 password: 'i<3Lambd4'
-            }
+            },
+            isLoading: false
         }
 
 
@@ -35,14 +36,18 @@ class Login extends React.Component {
         axiosWithAuth()
             .post('/login', this.state.credentials)
             .then(res => {
-                localStorage.setItem('token', res.data);
+                localStorage.setItem('token', res.data.payload);
 
                 this.props.history.push('/friends')
             })
-            .catch(error => console.log(error.message.status))
+            .catch(error => console.log(error.response.status))
     }
 
     render() {
+
+        // if(localStorage.getItem('token')) {
+        //     return <Redirect to="/login"/>
+        // }
         return (
             <div className="login-container">
                 <form onSubmit={this.login}>

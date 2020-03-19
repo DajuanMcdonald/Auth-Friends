@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter, Link, Switch } from 'react-router-dom';
 import './App.css'
-import Friends from './components/Friends';
+import FriendForm from './components/FriendForm';
 import Home from './components/Home';
 
 import Login from './Login';
@@ -32,9 +32,9 @@ class App extends React.Component {
             </ul>
           </nav>
 
-            <Switch>
-              <PrivateRoute exact path='/friends' component={Friends} />
-              <Route path='/login' component={Login} />
+            <Switch>    
+              <PrivateRoute exact path='/friends' component={FriendForm} />
+              <Route exact path='/login' component={Login} />
               <Route path="/" exact component={Home} />
               
               <Route component={Login} />
